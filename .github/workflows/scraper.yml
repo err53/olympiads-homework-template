@@ -1,0 +1,54 @@
+name: Run Scraper
+
+on:
+  push:
+    branches:
+    - master
+  schedule:
+    - cron: "0 3 * * *"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Install LFS
+        run: git lfs install
+
+      - name: Checkout Scraper
+        uses: actions/checkout@v2
+        with:
+          repository: "jhthenerd/olympiads-scraper"
+          path: "scraper"
+
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('scraper/yarn.lock') }}
+
+      - name: Install Dependencies
+        run: cd scraper && yarn install
+
+      - name: Run Scraper
+        run: cd scraper && yarn start
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          PASS: ${{ secrets.PASS }}
+          PREFIX: "../homework/"
+
+      - name: Delete Scraper
+        run: rm -rf scraper
+
+      - name: Commit
+        uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
