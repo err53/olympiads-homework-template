@@ -32,7 +32,7 @@ jobs:
       - name: Cache node_modules
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: scraper/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('scraper/yarn.lock') }}
 
       - name: Install Dependencies
