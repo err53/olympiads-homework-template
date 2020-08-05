@@ -12,3 +12,10 @@ This runs automatically daily and upon any modifications to the Action
 1. Rename the existing remote origin to something else: `git remote rename origin upstream`
 1. Add your repo as the origin
 1. Push
+
+## Updating
+
+1. Pull updates from your own repo
+1. Pull updates from this repo `git pull upstream master`
+1. Merge changes
+1. Push
