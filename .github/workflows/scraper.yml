@@ -8,7 +8,7 @@ on:
     - cron: "0 * * * *"
 
 jobs:
-  check-secrets:
+  check:
     runs-on: ubuntu-latest
     outputs:
       emailexists: ${{ steps.check.outputs.emailexists }}
@@ -20,8 +20,8 @@ jobs:
           EMAIL: ${{ secrets.EMAIL }}
 
   scrape:
-    needs: [check-secrets]
-    if: needs.check-secrets.output.emailexists == 'true'
+    needs: [check]
+    if: needs.check.outputs.emailexists == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
