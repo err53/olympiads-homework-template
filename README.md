@@ -6,16 +6,16 @@ This runs automatically daily and upon any modifications to the Action
 
 ## Usage
 
-1. Clone this repository, optionally either deleting `.git`
-1. Create a new private repo
-1. Add your login email and password to secrets as `EMAIL` and `PASS` respectively
-1. Rename the existing remote origin to something else: `git remote rename origin upstream`
+1. Create a new repo on Github, preferrably private (make sure not to add a README or LICENSE, otherwise you might have merge conflicts)
+1. Add your login email and password to the new repo's secrets as `EMAIL` and `PASS` respectively
+1. Clone this repository to your computer, optionally deleting `.git`
+1. Rename the existing remote origin in the cloned folder to something else: `git remote rename origin upstream`
 1. Add your repo as the origin
 1. Push
 
 ## Updating
 
-1. Pull updates from your own repo
-1. Pull updates from this repo `git pull upstream master`
-1. Merge changes
+1. Pull updates from your own repo: `git pull`
+1. Pull updates from this repo: `git pull upstream master`
+1. Resolve any merge conflicts
 1. Push
