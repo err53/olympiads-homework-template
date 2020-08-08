@@ -21,7 +21,7 @@ jobs:
 
   scrape:
     needs: [check-secrets]
-    if: needs.build.output.emailexists == 'true'
+    if: needs.check-secrets.output.emailexists == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
