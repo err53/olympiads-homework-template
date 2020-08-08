@@ -9,13 +9,15 @@ on:
 
 jobs:
   check-secrets:
+    runs-on: ubuntu-latest
     outputs:
       emailexists: ${{ steps.check.putputs.emailexists }}
     steps:
       - name: Check Secrets
         id: check
-        if: ${{ secrets.EMAIL != 0}}
-        run: echo "::set-output name=emailexists::true"
+        run: echo "::set-output name=emailexists::${{ env.EMAIL != '' }}"
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
 
   scrape:
     needs: [check-secrets]
