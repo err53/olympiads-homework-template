@@ -11,7 +11,7 @@ jobs:
   check-secrets:
     runs-on: ubuntu-latest
     outputs:
-      emailexists: ${{ steps.check.putputs.emailexists }}
+      emailexists: ${{ steps.check.outputs.emailexists }}
     steps:
       - name: Check Secrets
         id: check
@@ -21,7 +21,7 @@ jobs:
 
   scrape:
     needs: [check-secrets]
-    if: needs.build.output.emailexists
+    if: needs.build.output.emailexists == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
