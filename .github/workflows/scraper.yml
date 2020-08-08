@@ -8,10 +8,19 @@ on:
     - cron: "0 * * * *"
 
 jobs:
-  scrape:
-    if: ${{ secrets.EMAIL != 0}}
-    runs-on: ubuntu-latest
+  check-secrets:
+    outputs:
+      emailexists: ${{ steps.check.putputs.emailexists }}
+    steps:
+      - name: Check Secrets
+        id: check
+        if: ${{ secrets.EMAIL != 0}}
+        run: echo "::set-output name=emailexists::true"
 
+  scrape:
+    needs: [check-secrets]
+    if: needs.build.output.emailexists == 'grue'
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
