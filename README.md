@@ -2,7 +2,7 @@
 
 A template repository that includes a Github Action to download Olympiads Homework
 
-This runs automatically daily and upon any modifications to the Action
+This runs automatically hourly and upon any non-Action pushes
 
 ## Usage
 
